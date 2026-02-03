@@ -1,0 +1,2422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatGuard Pro | Available Tasks</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            color: #1e293b;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(59, 130, 246, 0.25);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn-large {
+            padding: 16px 32px;
+            font-size: 16px;
+        }
+
+        .btn-block {
+            display: block;
+            width: 100%;
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 13px;
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #64748b, #475569);
+        }
+
+        .btn-secondary:hover {
+            box-shadow: 0 6px 12px rgba(100, 116, 139, 0.3);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #10b981, #059669);
+        }
+
+        .btn-success:hover {
+            box-shadow: 0 6px 12px rgba(16, 185, 129, 0.3);
+        }
+
+        /* Login Protection Overlay */
+        .login-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 3000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .login-overlay.active {
+            display: flex;
+        }
+
+        .login-modal {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+            animation: modalSlide 0.3s ease;
+        }
+
+        @keyframes modalSlide {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .login-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 30px;
+            color: white;
+        }
+
+        .login-title {
+            font-size: 28px;
+            margin-bottom: 10px;
+            color: #1e293b;
+        }
+
+        .login-subtitle {
+            color: #64748b;
+            font-size: 16px;
+        }
+
+        .login-form {
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #1e293b;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-group label i {
+            color: #3b82f6;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 15px;
+            color: #1e293b;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #3b82f6;
+        }
+
+        .login-error {
+            background: #fee2e2;
+            border: 1px solid #fca5a5;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 20px;
+            color: #991b1b;
+            font-size: 14px;
+            display: none;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .login-error.active {
+            display: flex;
+        }
+
+        .login-requirements {
+            background: #f0f9ff;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 25px;
+            border-left: 4px solid #3b82f6;
+        }
+
+        .login-requirements p {
+            color: #1e40af;
+            font-size: 14px;
+            margin: 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .login-requirements i {
+            color: #3b82f6;
+            margin-top: 2px;
+        }
+
+        .login-footer {
+            text-align: center;
+            color: #64748b;
+            font-size: 14px;
+            margin-top: 20px;
+        }
+
+        .login-footer a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .login-footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Announcement Bar */
+        .announcement-bar {
+            background: linear-gradient(90deg, #1e3a8a, #3b82f6);
+            color: white;
+            padding: 10px 0;
+            font-size: 14px;
+        }
+
+        .announcement-text {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .announcement-text i {
+            color: #fbbf24;
+        }
+
+        .announcement-link {
+            color: #93c5fd;
+            text-decoration: none;
+            font-weight: 600;
+            margin-left: 10px;
+            transition: color 0.3s ease;
+        }
+
+        .announcement-link:hover {
+            color: white;
+            text-decoration: underline;
+        }
+
+        /* Navigation */
+        .navbar {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 24px;
+            font-weight: 800;
+            color: #1e293b;
+        }
+
+        .logo i {
+            color: #3b82f6;
+        }
+
+        .logo-highlight {
+            color: #3b82f6;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-link {
+            color: #64748b;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 15px;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: #3b82f6;
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #3b82f6;
+            border-radius: 2px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .btn-login {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 6px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-login:hover {
+            background-color: #f1f5f9;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #64748b;
+            cursor: pointer;
+        }
+
+        /* Tasks Header */
+        .section-tasks-header {
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+            color: white;
+            padding: 60px 0;
+        }
+
+        .tasks-header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+
+        .tasks-header-text h1 {
+            color: white;
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+
+        .tasks-header-text p {
+            font-size: 18px;
+            color: #e2e8f0;
+            max-width: 500px;
+        }
+
+        .tasks-header-stats {
+            display: flex;
+            gap: 30px;
+        }
+
+        .tasks-stat {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 12px;
+            min-width: 220px;
+        }
+
+        .tasks-stat-icon {
+            background: rgba(255, 255, 255, 0.2);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+        }
+
+        .tasks-stat-label {
+            font-size: 14px;
+            color: #cbd5e1;
+            margin-bottom: 5px;
+        }
+
+        .tasks-stat-amount {
+            font-size: 24px;
+            font-weight: 700;
+            color: white;
+        }
+
+        /* Tasks Main Content */
+        .section-tasks {
+            padding: 60px 0;
+        }
+
+        .tasks-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .tasks-filter {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: white;
+            border: 2px solid #e2e8f0;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 500;
+            color: #64748b;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: #3b82f6;
+            color: white;
+            border-color: #3b82f6;
+        }
+
+        .tasks-search {
+            position: relative;
+            min-width: 300px;
+        }
+
+        .tasks-search input {
+            width: 100%;
+            padding: 12px 20px 12px 45px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 15px;
+            color: #1e293b;
+            transition: border-color 0.3s ease;
+        }
+
+        .tasks-search input:focus {
+            outline: none;
+            border-color: #3b82f6;
+        }
+
+        .tasks-search i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #64748b;
+        }
+
+        /* Tasks Grid */
+        .tasks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .task-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #e2e8f0;
+        }
+
+        .task-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .task-header {
+            padding: 25px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .task-category {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 12px;
+            background: #f0f9ff;
+            color: #3b82f6;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .task-title {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #1e293b;
+        }
+
+        .task-description {
+            color: #64748b;
+            font-size: 14px;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .task-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        .task-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            color: #64748b;
+        }
+
+        .task-meta-item i {
+            color: #3b82f6;
+        }
+
+        .task-level {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .level-beginner {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .level-intermediate {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .level-advanced {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .task-body {
+            padding: 25px;
+        }
+
+        .task-skills {
+            margin-bottom: 20px;
+        }
+
+        .task-skills h4 {
+            font-size: 14px;
+            margin-bottom: 10px;
+            color: #64748b;
+        }
+
+        .skills-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .skill-tag {
+            background: #f1f5f9;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            color: #475569;
+        }
+
+        .task-rewards {
+            background: #f8fafc;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .reward-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .reward-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .reward-label {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .reward-value {
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        .reward-highlight {
+            color: #10b981;
+            font-weight: 700;
+        }
+
+        .task-footer {
+            padding: 20px 25px;
+            background: #f8fafc;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .task-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-view-details {
+            flex: 1;
+        }
+
+        .btn-apply {
+            flex: 2;
+        }
+
+        /* Task Details Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: modalSlide 0.3s ease;
+        }
+
+        .modal-header {
+            padding: 30px;
+            border-bottom: 1px solid #e2e8f0;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #64748b;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .modal-close:hover {
+            color: #1e293b;
+        }
+
+        .modal-title {
+            font-size: 28px;
+            margin-bottom: 10px;
+            color: #1e293b;
+        }
+
+        .modal-subtitle {
+            color: #64748b;
+            font-size: 16px;
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        .task-detail-section {
+            margin-bottom: 30px;
+        }
+
+        .task-detail-section h4 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #1e293b;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .task-detail-section h4 i {
+            color: #3b82f6;
+        }
+
+        .task-detail-content {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .requirements-list {
+            list-style: none;
+        }
+
+        .requirements-list li {
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .requirements-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #10b981;
+            font-weight: bold;
+        }
+
+        .task-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .task-stat {
+            background: #f8fafc;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .task-stat i {
+            font-size: 24px;
+            color: #3b82f6;
+            margin-bottom: 10px;
+        }
+
+        .task-stat-label {
+            font-size: 12px;
+            color: #64748b;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .task-stat-value {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1e293b;
+        }
+
+        /* Application Form */
+        .application-form {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .application-form-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .application-form-header h3 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            color: #1e293b;
+        }
+
+        .application-form-header p {
+            color: #64748b;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-requirements {
+            background: #f0f9ff;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-left: 4px solid #3b82f6;
+        }
+
+        .form-requirements h4 {
+            color: #1e40af;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-requirements p {
+            color: #1e40af;
+            font-size: 14px;
+            margin: 0;
+        }
+
+        /* Processing Modal */
+        .processing-modal .modal-content {
+            max-width: 500px;
+            text-align: center;
+        }
+
+        .processing-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 36px;
+            color: white;
+        }
+
+        .processing-title {
+            font-size: 28px;
+            margin-bottom: 15px;
+            color: #1e293b;
+        }
+
+        .processing-text {
+            color: #64748b;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+
+        .processing-details {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .processing-detail-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .processing-detail-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .processing-timeline {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 30px 0;
+            position: relative;
+        }
+
+        .processing-timeline:before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #e2e8f0;
+            transform: translateY(-50%);
+            z-index: 1;
+        }
+
+        .timeline-step {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .timeline-circle {
+            width: 30px;
+            height: 30px;
+            background: #e2e8f0;
+            border-radius: 50%;
+            margin: 0 auto 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .timeline-label {
+            font-size: 12px;
+            color: #64748b;
+        }
+
+        .timeline-step.active .timeline-circle {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .timeline-step.active .timeline-label {
+            color: #3b82f6;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        .footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            padding: 60px 0 30px;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section .logo {
+            color: white;
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .footer-description {
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            color: #94a3b8;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: #1e293b;
+            border-radius: 50%;
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: #3b82f6;
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .footer-section h4 {
+            color: white;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 30px;
+            border-top: 1px solid #334155;
+            font-size: 14px;
+        }
+
+        .footer-copyright {
+            color: #94a3b8;
+        }
+
+        .footer-legal {
+            display: flex;
+            gap: 25px;
+        }
+
+        .footer-legal a {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-legal a:hover {
+            color: white;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links, .nav-buttons {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .tasks-header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .tasks-header-stats {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .tasks-stat {
+                width: 100%;
+            }
+
+            .tasks-header-text h1 {
+                font-size: 32px;
+            }
+
+            .tasks-controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .tasks-search {
+                min-width: 100%;
+            }
+
+            .tasks-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .task-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+
+            .footer-legal {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .footer-content {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Protection Overlay -->
+    <div class="login-overlay" id="loginOverlay">
+        <div class="login-modal">
+            <div class="login-header">
+                <div class="login-icon">
+                    <i class="fas fa-shield-check"></i>
+                </div>
+                <h3 class="login-title">Secure Login Required</h3>
+                <p class="login-subtitle">Please login to access task applications</p>
+            </div>
+
+            <div class="login-error" id="loginError">
+                <i class="fas fa-exclamation-circle"></i>
+                <span id="errorMessage">Invalid credentials. Please try again.</span>
+            </div>
+
+            <div class="login-requirements">
+                <p>
+                    <i class="fas fa-info-circle"></i>
+                    You must be logged in with approved credentials to apply for moderation tasks.
+                </p>
+            </div>
+
+            <form class="login-form" id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail"><i class="fas fa-envelope"></i> Email Address</label>
+                    <input type="email" id="loginEmail" name="loginEmail" placeholder="Enter your registered email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="loginPassword"><i class="fas fa-lock"></i> Password</label>
+                    <input type="password" id="loginPassword" name="loginPassword" placeholder="Enter your password" required>
+                </div>
+
+                <button type="submit" class="btn-primary btn-large btn-block">
+                    <i class="fas fa-sign-in-alt"></i> Login to Continue
+                </button>
+            </form>
+
+            <div class="login-footer">
+                <p>Don't have an account? <a href="signup.html">Request access</a></p>
+                <p>Forgot password? <a href="reset-password.html">Reset here</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Top Announcement Bar -->
+    <div class="announcement-bar">
+        <div class="container">
+            <span class="announcement-text">
+                <i class="fas fa-bullhorn"></i> 
+                <strong>NEW TASKS AVAILABLE:</strong> Earn up to $35 per premium moderation task. 
+                <a href="#tasks" class="announcement-link">View All Tasks →</a>
+            </span>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <div class="logo">
+                    <i class="fas fa-shield-check"></i>
+                    <span>ChatGuard <span class="logo-highlight">Pro</span></span>
+                </div>
+                
+                <div class="nav-links">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="tasks.html" class="nav-link active">Tasks</a>
+                    <a href="earnings.html" class="nav-link">Earnings</a>
+                    <a href="dashboard.html" class="nav-link">Dashboard</a>
+                    <a href="withdrawal.html" class="nav-link">Withdraw</a>
+                    <a href="resources.html" class="nav-link">Resources</a>
+                </div>
+                
+                <div class="nav-buttons">
+                    <a href="login.html" class="btn-login">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </a>
+                    <a href="signup.html" class="btn-primary">
+                        <i class="fas fa-user-plus"></i> Get Started
+                    </a>
+                </div>
+                
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Tasks Header -->
+    <section class="section-tasks-header">
+        <div class="container">
+            <div class="tasks-header-content">
+                <div class="tasks-header-text">
+                    <h1>Available Moderation Tasks</h1>
+                    <p>Apply for premium moderation positions. Complete tasks and earn rewards for your expertise.</p>
+                </div>
+                
+                <div class="tasks-header-stats">
+                    <div class="tasks-stat">
+                        <div class="tasks-stat-icon">
+                            <i class="fas fa-tasks"></i>
+                        </div>
+                        <div class="tasks-stat-info">
+                            <div class="tasks-stat-label">Active Tasks</div>
+                            <div class="tasks-stat-amount" id="activeTasks">12</div>
+                        </div>
+                    </div>
+                    
+                    <div class="tasks-stat">
+                        <div class="tasks-stat-icon">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                        <div class="tasks-stat-info">
+                            <div class="tasks-stat-label">Average Pay</div>
+                            <div class="tasks-stat-amount">$21.50</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tasks Main Content -->
+    <section class="section-tasks" id="tasks">
+        <div class="container">
+            <!-- Tasks Controls -->
+            <div class="tasks-controls">
+                <div class="tasks-filter">
+                    <button class="filter-btn active" data-filter="all">All Tasks</button>
+                    <button class="filter-btn" data-filter="beginner">Beginner</button>
+                    <button class="filter-btn" data-filter="intermediate">Intermediate</button>
+                    <button class="filter-btn" data-filter="advanced">Advanced</button>
+                    <button class="filter-btn" data-filter="high-pay">High Pay</button>
+                </div>
+                
+                <div class="tasks-search">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="taskSearch" placeholder="Search tasks by keyword...">
+                </div>
+            </div>
+
+            <!-- Tasks Grid -->
+            <div class="tasks-grid" id="tasksGrid">
+                <!-- Task 1 -->
+                <div class="task-card" data-level="beginner" data-pay="15">
+                    <div class="task-header">
+                        <div class="task-category">
+                            <i class="fas fa-comments"></i>
+                            Live Chat Support
+                        </div>
+                        <h3 class="task-title">Social Media Chat Moderator</h3>
+                        <p class="task-description">Monitor and moderate live chat conversations on a popular social media platform.</p>
+                        <div class="task-meta">
+                            <div class="task-meta-item">
+                                <i class="far fa-clock"></i>
+                                <span>2-4 hours/day</span>
+                            </div>
+                            <span class="task-level level-beginner">Beginner</span>
+                        </div>
+                    </div>
+                    
+                    <div class="task-body">
+                        <div class="task-skills">
+                            <h4>Required Skills</h4>
+                            <div class="skills-tags">
+                                <span class="skill-tag">English Fluency</span>
+                                <span class="skill-tag">Basic Tech Skills</span>
+                                <span class="skill-tag">Good Communication</span>
+                            </div>
+                        </div>
+                        
+                        <div class="task-rewards">
+                            <div class="reward-item">
+                                <span class="reward-label">Per Task:</span>
+                                <span class="reward-value">$15.00</span>
+                            </div>
+                            <div class="reward-item">
+                                <span class="reward-label">Weekly Bonus:</span>
+                                <span class="reward-value">+$20.00</span>
+                            </div>
+                            <div class="reward-item">
+                                <span class="reward-label">Total Potential:</span>
+                                <span class="reward-value reward-highlight">$125.00/week</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="task-footer">
+                        <div class="task-actions">
+                            <button class="btn-primary btn-view-details" onclick="viewTaskDetails('task1')">
+                                <i class="fas fa-eye"></i> Details
+                            </button>
+                            <button class="btn-primary btn-apply btn-success" onclick="applyForTask('task1')">
+                                <i class="fas fa-paper-plane"></i> Apply Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task 2 -->
+                <div class="task-card" data-level="intermediate" data-pay="22">
+                    <div class="task-header">
+                        <div class="task-category">
+                            <i class="fas fa-gamepad"></i>
+                            Gaming Community
+                        </div>
+                        <h3 class="task-title">Gaming Discord Moderator</h3>
+                        <p class="task-description">Manage and moderate a popular gaming community Discord server with 10,000+ members.</p>
+                        <div class="task-meta">
+                            <div class="task-meta-item">
+                                <i class="far fa-clock"></i>
+                                <span>3-5 hours/day</span>
+                            </div>
+                            <span class="task-level level-intermediate">Intermediate</span>
+                        </div>
+                    </div>
+                    
+                    <div class="task-body">
+                        <div class="task-skills">
+                            <h4>Required Skills</h4>
+                            <div class="skills-tags">
+                                <span class="skill-tag">Discord Experience</span>
+                                <span class="skill-tag">Gaming Knowledge</span>
+                                <span class="skill-tag">Conflict Resolution</span>
+                                <span class="skill-tag">Community Management</span>
+                            </div>
+                        </div>
+                        
+                        <div class="task-rewards">
+                            <div class="reward-item">
+                                <span class="reward-label">Per Task:</span>
+                                <span class="reward-value">$22.00</span>
+                            </div>
+                            <div class="reward-item">
+                                <span class="reward-label">Weekly Bonus:</span>
+                                <span class="reward-value">+$35.00</span>
+                            </div>
+                            <div class="reward-item">
+                                <span class="reward-label">Total Potential:</span>
+                                <span class="reward-value reward-highlight">$185.00/week</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="task-footer">
+                        <div class="task-actions">
+                            <button class="btn-primary btn-view-details" onclick="viewTaskDetails('task2')">
+                                <i class="fas fa-eye"></i> Details
+                            </button>
+                            <button class="btn-primary btn-apply btn-success" onclick="applyForTask('task2')">
+                                <i class="fas fa-paper-plane"></i> Apply Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task 3 -->
+                <div class="task-card" data-level="advanced" data-pay="35">
+                    <div class="task-header">
+                        <div class="task-category">
+                            <i class="fas fa-briefcase"></i>
+                            Professional Platform
+                        </div>
+                        <h3 class="task-title">Enterprise Chat Supervisor</h3>
+                        <p class="task-description">Oversee professional chat communications for a corporate platform with premium clients.</p>
+                        <div class="task-meta">
+                            <div class="task-meta-item">
+                                <i class="far fa-clock"></i>
+                                <span>4-6 hours/day</span>
+                            </div>
+                            <span class="task-level level-advanced">Advanced</span>
+                        </div>
+                    </div>
+                    
+                    <div class="task-body">
+                        <div class="task-skills">
+                            <h4>Required Skills</h4>
+                            <div class="skills-tags">
+                                <span class="skill-tag">Professional English</span>
+                                <span class="skill-tag">Management Experience</span>
+                                <span class="skill-tag">Technical Writing</span>
+                                <span class="skill-tag">Crisis Management</span>
+                            </div>
+                        </div>
+                        
+                        <div class="task-rewards">
+                            <div class="reward-item">
+                                <span class="reward-label">Per Task:</span>
+                                <span class="reward-value">$35.00</span>
+                            </div>
+                            <div class="reward-item">
+                                <span class="reward-label">Weekly Bonus:</span>
+                                <span class="reward-value">+$50.00</span>
+                            </div>
+                            <div class="reward-item">
+                                <span class="reward-label">Total Potential:</span>
+                                <span class="reward-value reward-highlight">$260.00/week</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="task-footer">
+                        <div class="task-actions">
+                            <button class="btn-primary btn-view-details" onclick="viewTaskDetails('task3')">
+                                <i class="fas fa-eye"></i> Details
+                            </button>
+                            <button class="btn-primary btn-apply btn-success" onclick="applyForTask('task3')">
+                                <i class="fas fa-paper-plane"></i> Apply Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task 4 -->
+                <div class="task-card" data-level="beginner" data-pay="18">
+                    <div class="task-header">
+                        <div class="task-category">
+                            <i class="fas fa-mobile-alt"></i>
+                            Mobile App Support
+                        </div>
+                        <h3 class="task-title">App Chat Support Agent</h3>
+                        <p class="task-description">Provide chat support and moderation for a trending mobile application's user community.</p>
+                        <div class="task-meta">
+                            <div class="task-meta-item">
+                                <i class="far fa-clock"></i>
+                                <span>2-3 hours/day</span>
+                            </div>
+                            <span class="task-level level-beginner">Beginner</span>
+                        </div>
+                    </div>
+                    
+                    <div class="task-body">
+                        <div class="task-skills">
+                            <h4>Required Skills</h4>
+                            <div class="skills-tags">
+                                <span class="skill-tag">Mobile Tech Savvy</span>
+                                <span class="skill-tag">Customer Service</span>
+                                <span class="skill-tag">Quick Response</span>
+                            </div>
+                        </div>
+                        
+                        <div class="task-rewards">
+                            <div class="reward-item">
+                                <span class="reward-label">Per Task:</span>
+                                <span class="reward-value">$18.00</span>
+                            </div>
+                            <div class="reward-item">
+                                <span class="reward-label">Weekly Bonus:</span>
+                                <span class="reward-value">+$15.00</span>
+                            </div>
+                            <div class="reward-item">
+                                <span class="reward-label">Total Potential:</span>
+                                <span class="reward-value reward-highlight">$111.00/week</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="task-footer">
+                        <div class="task-actions">
+                            <button class="btn-primary btn-view-details" onclick="viewTaskDetails('task4')">
+                                <i class="fas fa-eye"></i> Details
+                            </button>
+                            <button class="btn-primary btn-apply btn-success" onclick="applyForTask('task4')">
+                                <i class="fas fa-paper-plane"></i> Apply Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task 5 -->
+                <div class="task-card" data-level="intermediate" data-pay="28">
+                    <div class="task-header">
+                        <div class="task-category">
+                            <i class="fas fa-globe"></i>
+                            International Platform
+                        </div>
+                        <h3 class="task-title">Multilingual Chat Moderator</h3>
+                        <p class="task-description">Moderate chat conversations in multiple languages for an international platform.</p>
+                        <div class="task-meta">
+                            <div class="task-meta-item">
+                                <i class="far fa-clock"></i>
+                                <span>3-4 hours/day</span>
+                            </div>
+                            <span class="task-level level-intermediate">Intermediate</span>
+                        </div>
+                    </div>
+                    
+                    <div class="task-body">
+                        <div class="task-skills">
+                            <h4>Required Skills</h4>
+                            <div class="skills-tags">
+                                <span class="skill-tag">Bilingual (Spanish/English)</span>
+                                <span class="skill-tag">Cultural Awareness</span>
+                                <span class="skill-tag">Translation Skills</span>
+                            </div>
+                        </div>
+                        
+                        <div class="task-rewards">
+                            <div class="reward-item">
+                                <span class="reward-label">Per Task:</span>
+                                <span class="reward-value">$28.00</span>
+                            </div>
+                            <div class="reward-item">
+                                <span class="reward-label">Language Bonus:</span>
+                                <span class="reward-value">+$12.00</span>
+                            </div>
+                            <div class="reward-item">
+                                <span class="reward-label">Total Potential:</span>
+                                <span class="reward-value reward-highlight">$200.00/week</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="task-footer">
+                        <div class="task-actions">
+                            <button class="btn-primary btn-view-details" onclick="viewTaskDetails('task5')">
+                                <i class="fas fa-eye"></i> Details
+                            </button>
+                            <button class="btn-primary btn-apply btn-success" onclick="applyForTask('task5')">
+                                <i class="fas fa-paper-plane"></i> Apply Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task 6 -->
+                <div class="task-card" data-level="advanced" data-pay="42">
+                    <div class="task-header">
+                        <div class="task-category">
+                            <i class="fas fa-shield-alt"></i>
+                            Security Focused
+                        </div>
+                        <h3 class="task-title">Premium Security Moderator</h3>
+                        <p class="task-description">High-security chat moderation for financial and sensitive data platforms.</p>
+                        <div class="task-meta">
+                            <div class="task-meta-item">
+                                <i class="far fa-clock"></i>
+                                <span>5-7 hours/day</span>
+                            </div>
+                            <span class="task-level level-advanced">Advanced</span>
+                        </div>
+                    </div>
+                    
+                    <div class="task-body">
+                        <div class="task-skills">
+                            <h4>Required Skills</h4>
+                            <div class="skills-tags">
+                                <span class="skill-tag">Security Training</span>
+                                <span class="skill-tag">Compliance Knowledge</span>
+                                <span class="skill-tag">Attention to Detail</span>
+                                <span class="skill-tag">Certification Preferred</span>
+                            </div>
+                        </div>
+                        
+                        <div class="task-rewards">
+                            <div class="reward-item">
+                                <span class="reward-label">Per Task:</span>
+                                <span class="reward-value">$42.00</span>
+                            </div>
+                            <div class="reward-item">
+                                <span class="reward-label">Security Bonus:</span>
+                                <span class="reward-value">+$30.00</span>
+                            </div>
+                            <div class="reward-item">
+                                <span class="reward-label">Total Potential:</span>
+                                <span class="reward-value reward-highlight">$360.00/week</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="task-footer">
+                        <div class="task-actions">
+                            <button class="btn-primary btn-view-details" onclick="viewTaskDetails('task6')">
+                                <i class="fas fa-eye"></i> Details
+                            </button>
+                            <button class="btn-primary btn-apply btn-success" onclick="applyForTask('task6')">
+                                <i class="fas fa-paper-plane"></i> Apply Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="logo">
+                        <i class="fas fa-shield-check"></i>
+                        <span>ChatGuard <span class="logo-highlight">Pro</span></span>
+                    </div>
+                    <p class="footer-description">
+                        Professional chat moderation platform connecting businesses with certified moderators worldwide.
+                    </p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-discord"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>For Moderators</h4>
+                    <ul class="footer-links">
+                        <li><a href="tasks.html">Find Tasks</a></li>
+                        <li><a href="earnings.html">Earnings Calculator</a></li>
+                        <li><a href="training.html">Training Program</a></li>
+                        <li><a href="withdrawal.html">Withdraw Earnings</a></li>
+                        <li><a href="community.html">Community Forum</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>For Businesses</h4>
+                    <ul class="footer-links">
+                        <li><a href="hire.html">Hire Moderators</a></li>
+                        <li><a href="enterprise.html">Enterprise Solutions</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="case-studies.html">Case Studies</a></li>
+                        <li><a href="api.html">API Documentation</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="press.html">Press</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul class="footer-links">
+                        <li><a href="help.html">Help Center</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="payment-help.html">Payment Help</a></li>
+                        <li><a href="trust.html">Trust & Safety</a></li>
+                        <li><a href="report.html">Report Issues</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    &copy; 2024 ChatGuard Pro. All rights reserved.
+                </div>
+                <div class="footer-legal">
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
+                    <a href="cookies.html">Cookie Policy</a>
+                    <a href="gdpr.html">GDPR Compliance</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Task Details Modal -->
+    <div class="modal" id="taskDetailsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="modal-close" onclick="closeModal('taskDetailsModal')">
+                    <i class="fas fa-times"></i>
+                </button>
+                <h3 class="modal-title" id="modalTaskTitle">Social Media Chat Moderator</h3>
+                <p class="modal-subtitle" id="modalTaskCategory">Live Chat Support • Beginner Level</p>
+            </div>
+            
+            <div class="modal-body">
+                <div class="task-stats">
+                    <div class="task-stat">
+                        <i class="fas fa-dollar-sign"></i>
+                        <div class="task-stat-label">Pay Rate</div>
+                        <div class="task-stat-value" id="modalPayRate">$15.00/task</div>
+                    </div>
+                    <div class="task-stat">
+                        <i class="far fa-clock"></i>
+                        <div class="task-stat-label">Time Commitment</div>
+                        <div class="task-stat-value" id="modalTimeCommitment">2-4 hours/day</div>
+                    </div>
+                    <div class="task-stat">
+                        <i class="fas fa-calendar-alt"></i>
+                        <div class="task-stat-label">Duration</div>
+                        <div class="task-stat-value" id="modalDuration">30 days</div>
+                    </div>
+                </div>
+                
+                <div class="task-detail-section">
+                    <h4><i class="fas fa-info-circle"></i> Task Description</h4>
+                    <div class="task-detail-content">
+                        <p id="modalTaskDescription">Monitor and moderate live chat conversations on a popular social media platform. Ensure compliance with community guidelines, respond to user inquiries, and maintain a positive user experience.</p>
+                    </div>
+                </div>
+                
+                <div class="task-detail-section">
+                    <h4><i class="fas fa-tasks"></i> Responsibilities</h4>
+                    <div class="task-detail-content">
+                        <ul class="requirements-list" id="modalResponsibilities">
+                            <li>Monitor real-time chat conversations</li>
+                            <li>Enforce community guidelines and policies</li>
+                            <li>Respond to user questions and concerns</li>
+                            <li>Report inappropriate content and users</li>
+                            <li>Maintain detailed moderation logs</li>
+                            <li>Provide weekly activity reports</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="task-detail-section">
+                    <h4><i class="fas fa-graduation-cap"></i> Requirements</h4>
+                    <div class="task-detail-content">
+                        <ul class="requirements-list" id="modalRequirements">
+                            <li>Fluent in English (written and spoken)</li>
+                            <li>Basic understanding of social media platforms</li>
+                            <li>Good communication skills</li>
+                            <li>Reliable internet connection</li>
+                            <li>Attention to detail</li>
+                            <li>Ability to work independently</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="task-detail-section">
+                    <h4><i class="fas fa-award"></i> Rewards & Benefits</h4>
+                    <div class="task-detail-content">
+                        <div class="reward-item">
+                            <span class="reward-label">Base Pay per Task:</span>
+                            <span class="reward-value" id="modalBasePay">$15.00</span>
+                        </div>
+                        <div class="reward-item">
+                            <span class="reward-label">Weekly Performance Bonus:</span>
+                            <span class="reward-value" id="modalWeeklyBonus">+$20.00</span>
+                        </div>
+                        <div class="reward-item">
+                            <span class="reward-label">Monthly Completion Bonus:</span>
+                            <span class="reward-value" id="modalMonthlyBonus">+$50.00</span>
+                        </div>
+                        <div class="reward-item" style="margin-top: 10px; padding-top: 10px; border-top: 1px solid #e2e8f0;">
+                            <span class="reward-label">Total Potential Monthly:</span>
+                            <span class="reward-value reward-highlight" id="modalTotalPotential">$550.00</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="task-detail-section">
+                    <h4><i class="fas fa-calendar-check"></i> Application Process</h4>
+                    <div class="task-detail-content">
+                        <p>Applications are reviewed within <strong>1-2 business days</strong>. Successful applicants will receive onboarding materials and training resources.</p>
+                        <div class="login-requirements" style="margin-top: 15px;">
+                            <p>
+                                <i class="fas fa-lock"></i>
+                                <strong>Security Note:</strong> You must be logged in with approved credentials to submit an application.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="btn-primary btn-large btn-block" onclick="applyForTaskFromModal()" style="margin-top: 30px;">
+                    <i class="fas fa-paper-plane"></i> Apply for This Position
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Application Form Modal -->
+    <div class="modal" id="applicationModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="modal-close" onclick="closeModal('applicationModal')">
+                    <i class="fas fa-times"></i>
+                </button>
+                <h3 class="modal-title">Application Form</h3>
+                <p class="modal-subtitle" id="applicationTaskTitle">Social Media Chat Moderator</p>
+            </div>
+            
+            <div class="modal-body">
+                <div class="application-form">
+                    <div class="form-requirements">
+                        <h4><i class="fas fa-info-circle"></i> Important Information</h4>
+                        <p>Applications are reviewed manually by our team within <strong>1-2 business days</strong>. Please ensure all information is accurate and complete.</p>
+                    </div>
+                    
+                    <form id="applicationForm">
+                        <div class="form-group">
+                            <label for="applicantName"><i class="fas fa-user"></i> Full Name</label>
+                            <input type="text" id="applicantName" name="applicantName" placeholder="Enter your full name" required>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="applicantEmail"><i class="fas fa-envelope"></i> Email Address</label>
+                                <input type="email" id="applicantEmail" name="applicantEmail" placeholder="your.email@example.com" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="applicantPhone"><i class="fas fa-phone"></i> Phone Number</label>
+                                <input type="tel" id="applicantPhone" name="applicantPhone" placeholder="+1 (555) 123-4567" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="applicantCountry"><i class="fas fa-globe"></i> Country of Residence</label>
+                                <select id="applicantCountry" name="applicantCountry" required>
+                                    <option value="">Select Country</option>
+                                    <option value="us">United States</option>
+                                    <option value="uk">United Kingdom</option>
+                                    <option value="ca">Canada</option>
+                                    <option value="au">Australia</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="applicantTimezone"><i class="fas fa-clock"></i> Time Zone</label>
+                                <select id="applicantTimezone" name="applicantTimezone" required>
+                                    <option value="">Select Time Zone</option>
+                                    <option value="est">EST (Eastern Standard Time)</option>
+                                    <option value="pst">PST (Pacific Standard Time)</option>
+                                    <option value="cst">CST (Central Standard Time)</option>
+                                    <option value="gmt">GMT (Greenwich Mean Time)</option>
+                                    <option value="cet">CET (Central European Time)</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="applicantExperience"><i class="fas fa-briefcase"></i> Relevant Experience</label>
+                            <select id="applicantExperience" name="applicantExperience" required>
+                                <option value="">Select Experience Level</option>
+                                <option value="none">No prior experience</option>
+                                <option value="beginner">1-6 months experience</option>
+                                <option value="intermediate">6 months - 2 years experience</option>
+                                <option value="advanced">2+ years experience</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="applicantSkills"><i class="fas fa-star"></i> Why are you suitable for this position?</label>
+                            <textarea id="applicantSkills" name="applicantSkills" placeholder="Describe your relevant skills, experience, and why you would be a good fit for this moderation position..." required></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="applicantAvailability"><i class="fas fa-calendar-alt"></i> Weekly Availability</label>
+                            <textarea id="applicantAvailability" name="applicantAvailability" placeholder="Please indicate your available days and hours per week for this position..." required></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div style="display: flex; align-items: flex-start; gap: 10px;">
+                                <input type="checkbox" id="termsAgreement" name="termsAgreement" required style="width: auto; margin-top: 5px;">
+                                <label for="termsAgreement" style="font-weight: normal; margin-bottom: 0;">
+                                    I agree to the <a href="terms.html">Terms of Service</a> and <a href="privacy.html">Privacy Policy</a>. I understand that my application will be reviewed within 1-2 business days and I will be notified via email of the outcome.
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="btn-primary btn-large btn-block">
+                            <i class="fas fa-paper-plane"></i> Submit Application
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Processing Modal -->
+    <div class="modal processing-modal" id="processingModal">
+        <div class="modal-content">
+            <div class="processing-icon">
+                <i class="fas fa-hourglass-half"></i>
+            </div>
+            <h3 class="processing-title">Application Submitted</h3>
+            <p class="processing-text">Your application is now being processed. Our team will review it within the specified timeframe.</p>
+            
+            <div class="processing-details">
+                <div class="processing-detail-item">
+                    <span>Application ID:</span>
+                    <strong id="processingAppId">CG-APP-00000000</strong>
+                </div>
+                <div class="processing-detail-item">
+                    <span>Position:</span>
+                    <strong id="processingPosition">Social Media Chat Moderator</strong>
+                </div>
+                <div class="processing-detail-item">
+                    <span>Review Timeline:</span>
+                    <strong>1-2 Business Days</strong>
+                </div>
+            </div>
+            
+            <div class="processing-timeline">
+                <div class="timeline-step active">
+                    <div class="timeline-circle">1</div>
+                    <div class="timeline-label">Submitted</div>
+                </div>
+                <div class="timeline-step">
+                    <div class="timeline-circle">2</div>
+                    <div class="timeline-label">Review</div>
+                </div>
+                <div class="timeline-step">
+                    <div class="timeline-circle">3</div>
+                    <div class="timeline-label">Decision</div>
+                </div>
+            </div>
+            
+            <p style="color: #64748b; font-size: 14px; margin-bottom: 25px;">
+                <i class="fas fa-envelope"></i> You will receive an email confirmation and updates about your application status.
+            </p>
+            
+            <button class="btn-primary btn-large btn-block" onclick="closeAllModals()">
+                <i class="fas fa-check-circle"></i> Close
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Task Data
+        const tasks = {
+            task1: {
+                title: "Social Media Chat Moderator",
+                category: "Live Chat Support • Beginner Level",
+                description: "Monitor and moderate live chat conversations on a popular social media platform. Ensure compliance with community guidelines, respond to user inquiries, and maintain a positive user experience.",
+                payRate: "$15.00/task",
+                timeCommitment: "2-4 hours/day",
+                duration: "30 days",
+                responsibilities: [
+                    "Monitor real-time chat conversations",
+                    "Enforce community guidelines and policies",
+                    "Respond to user questions and concerns",
+                    "Report inappropriate content and users",
+                    "Maintain detailed moderation logs",
+                    "Provide weekly activity reports"
+                ],
+                requirements: [
+                    "Fluent in English (written and spoken)",
+                    "Basic understanding of social media platforms",
+                    "Good communication skills",
+                    "Reliable internet connection",
+                    "Attention to detail",
+                    "Ability to work independently"
+                ],
+                basePay: "$15.00",
+                weeklyBonus: "+$20.00",
+                monthlyBonus: "+$50.00",
+                totalPotential: "$550.00"
+            },
+            task2: {
+                title: "Gaming Discord Moderator",
+                category: "Gaming Community • Intermediate Level",
+                description: "Manage and moderate a popular gaming community Discord server with 10,000+ members. Handle user disputes, enforce rules, and maintain a positive gaming environment.",
+                payRate: "$22.00/task",
+                timeCommitment: "3-5 hours/day",
+                duration: "45 days",
+                responsibilities: [
+                    "Monitor Discord channels and voice chats",
+                    "Enforce community rules and guidelines",
+                    "Handle user reports and disputes",
+                    "Organize community events",
+                    "Train junior moderators",
+                    "Generate weekly community reports"
+                ],
+                requirements: [
+                    "Extensive Discord experience",
+                    "Gaming community knowledge",
+                    "Conflict resolution skills",
+                    "Experience with moderation bots",
+                    "Team management abilities",
+                    "Flexible schedule for peak hours"
+                ],
+                basePay: "$22.00",
+                weeklyBonus: "+$35.00",
+                monthlyBonus: "+$75.00",
+                totalPotential: "$740.00"
+            },
+            task3: {
+                title: "Enterprise Chat Supervisor",
+                category: "Professional Platform • Advanced Level",
+                description: "Oversee professional chat communications for a corporate platform with premium clients. Ensure business communications maintain high standards of professionalism and security.",
+                payRate: "$35.00/task",
+                timeCommitment: "4-6 hours/day",
+                duration: "60 days",
+                responsibilities: [
+                    "Supervise corporate chat communications",
+                    "Ensure compliance with business standards",
+                    "Train and mentor team members",
+                    "Handle escalated customer issues",
+                    "Implement security protocols",
+                    "Generate comprehensive monthly reports"
+                ],
+                requirements: [
+                    "Professional business communication",
+                    "Previous management experience",
+                    "Technical writing proficiency",
+                    "Crisis management skills",
+                    "Security clearance (preferred)",
+                    "Corporate environment experience"
+                ],
+                basePay: "$35.00",
+                weeklyBonus: "+$50.00",
+                monthlyBonus: "+$100.00",
+                totalPotential: "$1,200.00"
+            },
+            task4: {
+                title: "App Chat Support Agent",
+                category: "Mobile App Support • Beginner Level",
+                description: "Provide chat support and moderation for a trending mobile application's user community. Assist users with app functionality and maintain a positive community environment.",
+                payRate: "$18.00/task",
+                timeCommitment: "2-3 hours/day",
+                duration: "30 days",
+                responsibilities: [
+                    "Provide in-app chat support",
+                    "Moderate user discussions",
+                    "Report technical issues",
+                    "Assist with user onboarding",
+                    "Collect user feedback",
+                    "Maintain support documentation"
+                ],
+                requirements: [
+                    "Mobile technology proficiency",
+                    "Customer service experience",
+                    "Quick problem-solving skills",
+                    "Patience with new users",
+                    "Basic troubleshooting knowledge",
+                    "Consistent availability"
+                ],
+                basePay: "$18.00",
+                weeklyBonus: "+$15.00",
+                monthlyBonus: "+$30.00",
+                totalPotential: "$330.00"
+            },
+            task5: {
+                title: "Multilingual Chat Moderator",
+                category: "International Platform • Intermediate Level",
+                description: "Moderate chat conversations in multiple languages for an international platform. Bridge cultural gaps and ensure inclusive communication across diverse user bases.",
+                payRate: "$28.00/task",
+                timeCommitment: "3-4 hours/day",
+                duration: "45 days",
+                responsibilities: [
+                    "Moderate multilingual conversations",
+                    "Translate between languages when needed",
+                    "Ensure cultural sensitivity",
+                    "Handle international user disputes",
+                    "Maintain language-specific guidelines",
+                    "Provide cultural context to team"
+                ],
+                requirements: [
+                    "Bilingual (Spanish/English minimum)",
+                    "Cultural awareness training",
+                    "Translation experience",
+                    "International communication skills",
+                    "Flexibility with time zones",
+                    "Cross-cultural sensitivity"
+                ],
+                basePay: "$28.00",
+                weeklyBonus: "+$40.00",
+                monthlyBonus: "+$80.00",
+                totalPotential: "$980.00"
+            },
+            task6: {
+                title: "Premium Security Moderator",
+                category: "Security Focused • Advanced Level",
+                description: "High-security chat moderation for financial and sensitive data platforms. Ensure strict compliance with security protocols and protect sensitive information.",
+                payRate: "$42.00/task",
+                timeCommitment: "5-7 hours/day",
+                duration: "90 days",
+                responsibilities: [
+                    "Monitor secure communication channels",
+                    "Enforce strict security protocols",
+                    "Handle sensitive information",
+                    "Conduct security audits",
+                    "Train security procedures",
+                    "Report security incidents"
+                ],
+                requirements: [
+                    "Security certification (preferred)",
+                    "Compliance knowledge",
+                    "Extreme attention to detail",
+                    "Background check clearance",
+                    "Professional confidentiality",
+                    "Emergency response training"
+                ],
+                basePay: "$42.00",
+                weeklyBonus: "+$60.00",
+                monthlyBonus: "+$150.00",
+                totalPotential: "$1,590.00"
+            }
+        };
+
+        // Accounts Credentials (Using existing accounts)
+        const validAccounts = [
+            {
+                email: "john.doe@example.com",
+                password: "SecurePass123!"
+            },
+            {
+                email: "jane.smith@example.com",
+                password: "Moderator2024!"
+            },
+            {
+                email: "alex.johnson@example.com",
+                password: "ChatGuardPro!"
+            }
+        ];
+
+        // State Management
+        let currentTaskId = '';
+        let isLoggedIn = false;
+        let loginAttempts = 0;
+        const maxLoginAttempts = 3;
+
+        // View Task Details
+        function viewTaskDetails(taskId) {
+            const task = tasks[taskId];
+            if (!task) return;
+
+            document.getElementById('modalTaskTitle').textContent = task.title;
+            document.getElementById('modalTaskCategory').textContent = task.category;
+            document.getElementById('modalTaskDescription').textContent = task.description;
+            document.getElementById('modalPayRate').textContent = task.payRate;
+            document.getElementById('modalTimeCommitment').textContent = task.timeCommitment;
+            document.getElementById('modalDuration').textContent = task.duration;
+            document.getElementById('modalBasePay').textContent = task.basePay;
+            document.getElementById('modalWeeklyBonus').textContent = task.weeklyBonus;
+            document.getElementById('modalMonthlyBonus').textContent = task.monthlyBonus;
+            document.getElementById('modalTotalPotential').textContent = task.totalPotential;
+
+            // Update responsibilities list
+            const responsibilitiesList = document.getElementById('modalResponsibilities');
+            responsibilitiesList.innerHTML = '';
+            task.responsibilities.forEach(resp => {
+                const li = document.createElement('li');
+                li.textContent = resp;
+                responsibilitiesList.appendChild(li);
+            });
+
+            // Update requirements list
+            const requirementsList = document.getElementById('modalRequirements');
+            requirementsList.innerHTML = '';
+            task.requirements.forEach(req => {
+                const li = document.createElement('li');
+                li.textContent = req;
+                requirementsList.appendChild(li);
+            });
+
+            currentTaskId = taskId;
+            document.getElementById('taskDetailsModal').classList.add('active');
+        }
+
+        // Apply for Task
+        function applyForTask(taskId) {
+            if (!isLoggedIn) {
+                currentTaskId = taskId;
+                showLoginModal();
+                return;
+            }
+            
+            const task = tasks[taskId];
+            if (!task) return;
+
+            document.getElementById('applicationTaskTitle').textContent = task.title;
+            document.getElementById('applicationModal').classList.add('active');
+        }
+
+        // Apply from Modal
+        function applyForTaskFromModal() {
+            closeModal('taskDetailsModal');
+            
+            if (!isLoggedIn) {
+                showLoginModal();
+                return;
+            }
+            
+            document.getElementById('applicationTaskTitle').textContent = tasks[currentTaskId].title;
+            document.getElementById('applicationModal').classList.add('active');
+        }
+
+        // Show Login Modal
+        function showLoginModal() {
+            document.getElementById('loginOverlay').classList.add('active');
+            document.getElementById('loginError').classList.remove('active');
+            document.getElementById('loginForm').reset();
+        }
+
+        // Close Modal
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        // Close Login Modal
+        function closeLoginModal() {
+            document.getElementById('loginOverlay').classList.remove('active');
+            loginAttempts = 0;
+        }
+
+        // Close All Modals
+        function closeAllModals() {
+            document.querySelectorAll('.modal').forEach(modal => {
+                modal.classList.remove('active');
+            });
+            document.getElementById('loginOverlay').classList.remove('active');
+            document.getElementById('applicationForm').reset();
+        }
+
+        // Task Filtering
+        document.addEventListener('DOMContentLoaded', function() {
+            // Filter buttons
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const filter = this.getAttribute('data-filter');
+                    filterTasks(filter);
+                });
+            });
+
+            // Search functionality
+            document.getElementById('taskSearch').addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                const filter = document.querySelector('.filter-btn.active').getAttribute('data-filter');
+                filterTasks(filter, searchTerm);
+            });
+
+            // Login form submission
+            document.getElementById('loginForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const email = document.getElementById('loginEmail').value;
+                const password = document.getElementById('loginPassword').value;
+                
+                // Validate credentials against existing accounts
+                const isValidAccount = validAccounts.some(account => 
+                    account.email === email && account.password === password
+                );
+                
+                if (isValidAccount) {
+                    isLoggedIn = true;
+                    loginAttempts = 0;
+                    closeLoginModal();
+                    
+                    // Proceed with task application if task was selected
+                    if (currentTaskId) {
+                        const task = tasks[currentTaskId];
+                        if (task) {
+                            document.getElementById('applicationTaskTitle').textContent = task.title;
+                            document.getElementById('applicationModal').classList.add('active');
+                        }
+                    }
+                } else {
+                    loginAttempts++;
+                    document.getElementById('errorMessage').textContent = 
+                        loginAttempts >= maxLoginAttempts 
+                            ? "Maximum login attempts exceeded. Please try again later."
+                            : "Invalid credentials. Please check your email and password.";
+                    document.getElementById('loginError').classList.add('active');
+                    
+                    if (loginAttempts >= maxLoginAttempts) {
+                        setTimeout(() => {
+                            closeLoginModal();
+                        }, 3000);
+                    }
+                }
+            });
+
+            // Application form submission
+            document.getElementById('applicationForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Generate application ID
+                const appId = 'CG-APP-' + Date.now().toString().slice(-8);
+                document.getElementById('processingAppId').textContent = appId;
+                document.getElementById('processingPosition').textContent = tasks[currentTaskId].title;
+                
+                // Close application modal and show processing modal
+                closeModal('applicationModal');
+                document.getElementById('processingModal').classList.add('active');
+                
+                // Reset form
+                this.reset();
+            });
+
+            // Mobile menu toggle
+            document.querySelector('.mobile-menu-btn')?.addEventListener('click', function() {
+                const navLinks = document.querySelector('.nav-links');
+                const navButtons = document.querySelector('.nav-buttons');
+                
+                navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+                navButtons.style.display = navButtons.style.display === 'flex' ? 'none' : 'flex';
+                
+                if (navLinks.style.display === 'flex') {
+                    navLinks.style.flexDirection = 'column';
+                    navLinks.style.position = 'absolute';
+                    navLinks.style.top = '100%';
+                    navLinks.style.left = '0';
+                    navLinks.style.right = '0';
+                    navLinks.style.background = 'white';
+                    navLinks.style.padding = '20px';
+                    navLinks.style.boxShadow = '0 10px 20px rgba(0,0,0,0.1)';
+                    
+                    navButtons.style.flexDirection = 'column';
+                    navButtons.style.position = 'absolute';
+                    navButtons.style.top = 'calc(100% + 200px)';
+                    navButtons.style.left = '0';
+                    navButtons.style.right = '0';
+                    navButtons.style.background = 'white';
+                    navButtons.style.padding = '20px';
+                    navButtons.style.boxShadow = '0 10px 20px rgba(0,0,0,0.1)';
+                }
+            });
+
+            // Initialize tasks count
+            updateTasksCount();
+        });
+
+        function filterTasks(filter, searchTerm = '') {
+            const cards = document.querySelectorAll('.task-card');
+            let visibleCount = 0;
+
+            cards.forEach(card => {
+                const level = card.getAttribute('data-level');
+                const pay = parseFloat(card.getAttribute('data-pay'));
+                const title = card.querySelector('.task-title').textContent.toLowerCase();
+                const description = card.querySelector('.task-description').textContent.toLowerCase();
+                
+                let shouldShow = true;
+
+                // Apply filter
+                if (filter !== 'all') {
+                    if (filter === 'high-pay') {
+                        shouldShow = pay >= 25;
+                    } else {
+                        shouldShow = level === filter;
+                    }
+                }
+
+                // Apply search
+                if (searchTerm && shouldShow) {
+                    shouldShow = title.includes(searchTerm) || description.includes(searchTerm);
+                }
+
+                // Show/hide card
+                card.style.display = shouldShow ? 'block' : 'none';
+                if (shouldShow) visibleCount++;
+            });
+
+            updateTasksCount(visibleCount);
+        }
+
+        function updateTasksCount(count = null) {
+            const counter = document.getElementById('activeTasks');
+            if (count !== null) {
+                counter.textContent = count;
+            } else {
+                // Initial count
+                const cards = document.querySelectorAll('.task-card');
+                counter.textContent = cards.length;
+            }
+        }
+    </script>
+</body>
+</html>
