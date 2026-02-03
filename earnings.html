@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Earnings Dashboard | ChatGuard Pro - Track Your Income</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="https://img.icons8.com/color/96/000000/chat-protection.png">
+</head>
+<body>
+    <!-- Top Announcement Bar -->
+    <div class="announcement-bar">
+        <div class="container">
+            <span class="announcement-text">
+                <i class="fas fa-money-bill-wave"></i> 
+                <strong>EARN $15 PER TASK:</strong> Complete tasks to start earning. 
+                <a href="tasks.html" class="announcement-link">View Tasks →</a>
+            </span>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <div class="logo">
+                    <i class="fas fa-shield-check"></i>
+                    <span>ChatGuard <span class="logo-highlight">Pro</span></span>
+                </div>
+                
+                <div class="nav-links">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="tasks.html" class="nav-link">Tasks</a>
+                    <a href="earnings.html" class="nav-link active">Earnings</a>
+                    <a href="dashboard.html" class="nav-link">Dashboard</a>
+                    <a href="#" class="nav-link">Reports</a>
+                    <a href="#" class="nav-link">Payment Center</a>
+                </div>
+                
+                <div class="nav-buttons" id="navButtons">
+                    <!-- Navigation will be auto-updated by JavaScript -->
+                    <a href="login.html" class="btn-login">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </a>
+                    <a href="index.html#signup" class="btn-primary">
+                        <i class="fas fa-user-plus"></i> Sign Up
+                    </a>
+                </div>
+                
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Earnings Header -->
+    <section class="earnings-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="header-text">
+                    <h1>Professional Earnings Dashboard</h1>
+                    <p>Track your income from completed moderation tasks. Earn $15 per task completion.</p>
+                </div>
+                
+                <div class="header-actions">
+                    <button class="btn-primary" onclick="window.location.href='tasks.html'">
+                        <i class="fas fa-tasks"></i> Start Earning
+                    </button>
+                    <button class="btn-secondary" onclick="window.location.href='withdrawal.html'">
+                        <i class="fas fa-money-check-alt"></i> Withdraw Info
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Quick Stats -->
+            <div class="earnings-quick-stats">
+                <div class="stat-card-large">
+                    <div class="stat-header">
+                        <div class="stat-title">
+                            <i class="fas fa-calendar-week"></i>
+                            <h3>This Week</h3>
+                        </div>
+                        <div class="stat-trend">--</div>
+                    </div>
+                    <div class="stat-amount">$0.00</div>
+                    <div class="stat-meta">Start by completing your first task</div>
+                </div>
+                
+                <div class="stat-card-large">
+                    <div class="stat-header">
+                        <div class="stat-title">
+                            <i class="fas fa-calendar-alt"></i>
+                            <h3>This Month</h3>
+                        </div>
+                        <div class="stat-trend">--</div>
+                    </div>
+                    <div class="stat-amount">$0.00</div>
+                    <div class="stat-meta">Potential: $900 with 15 tasks/week</div>
+                </div>
+                
+                <div class="stat-card-large">
+                    <div class="stat-header">
+                        <div class="stat-title">
+                            <i class="fas fa-chart-line"></i>
+                            <h3>All Time</h3>
+                        </div>
+                        <div class="stat-trend">--</div>
+                    </div>
+                    <div class="stat-amount">$0.00</div>
+                    <div class="stat-meta">Professional earnings start here</div>
+                </div>
+                
+                <div class="stat-card-large">
+                    <div class="stat-header">
+                        <div class="stat-title">
+                            <i class="fas fa-tasks"></i>
+                            <h3>Tasks Completed</h3>
+                        </div>
+                        <div class="stat-trend">--</div>
+                    </div>
+                    <div class="stat-amount">0</div>
+                    <div class="stat-meta">Earn $15 per completed task</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Earnings Overview -->
+    <section class="section-earnings-overview">
+        <div class="container">
+            <div class="section-header">
+                <h2>Earnings Overview</h2>
+                <p class="section-subtitle">Complete tasks to start tracking your earnings</p>
+            </div>
+            
+            <div class="earnings-chart-container">
+                <div class="chart-controls">
+                    <div class="timeframe-selector">
+                        <button class="timeframe-btn active">Week</button>
+                        <button class="timeframe-btn">Month</button>
+                        <button class="timeframe-btn">Quarter</button>
+                        <button class="timeframe-btn">Year</button>
+                    </div>
+                    
+                    <div class="chart-legend">
+                        <div class="legend-item">
+                            <span class="legend-color" style="background: #2563eb;"></span>
+                            <span>Task Earnings</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Earnings Chart (Empty) -->
+                <div class="earnings-chart">
+                    <div class="chart-mockup empty-chart">
+                        <div class="empty-chart-content">
+                            <i class="fas fa-chart-bar"></i>
+                            <h3>No Earnings Yet</h3>
+                            <p>Complete your first task to start tracking earnings</p>
+                            <button class="btn-primary" onclick="window.location.href='tasks.html'">
+                                <i class="fas fa-tasks"></i> Browse Tasks
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="chart-summary">
+                    <div class="summary-item">
+                        <span class="summary-label">Total This Week</span>
+                        <span class="summary-value">$0</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Tasks Completed</span>
+                        <span class="summary-value">0</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Avg. Per Task</span>
+                        <span class="summary-value">$15</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Potential Weekly</span>
+                        <span class="summary-value">$225</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Payment History -->
+    <section class="section-payment-history">
+        <div class="container">
+            <div class="section-header">
+                <h2>Payment History</h2>
+                <p class="section-subtitle">Completed tasks and pending payments</p>
+            </div>
+            
+            <div class="payment-tabs">
+                <button class="payment-tab active">Completed</button>
+                <button class="payment-tab">Pending</button>
+                <button class="payment-tab">All History</button>
+            </div>
+            
+            <div class="payments-table-container">
+                <div class="empty-payments">
+                    <i class="fas fa-receipt"></i>
+                    <h3>No Payments Yet</h3>
+                    <p>Complete tasks to see your payment history here</p>
+                    <button class="btn-primary" onclick="window.location.href='tasks.html'">
+                        <i class="fas fa-play-circle"></i> Start Your First Task
+                    </button>
+                </div>
+            </div>
+            
+            <div class="payments-summary">
+                <div class="summary-card">
+                    <h3><i class="fas fa-calendar-check"></i> Next Payment</h3>
+                    <div class="summary-content">
+                        <div class="payment-date">
+                            <div class="date-label">When you earn</div>
+                            <div class="date-value">--</div>
+                        </div>
+                        <div class="payment-amount">
+                            <div class="amount-label">Amount</div>
+                            <div class="amount-value">$0.00</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="summary-card">
+                    <h3><i class="fas fa-percentage"></i> Payment Rate</h3>
+                    <div class="summary-content">
+                        <div class="tax-info">
+                            <div class="tax-rate">$15</div>
+                            <div class="tax-amount">per task</div>
+                        </div>
+                        <div class="tax-note">Fixed rate per completed task</div>
+                    </div>
+                </div>
+                
+                <div class="summary-card">
+                    <h3><i class="fas fa-trophy"></i> Quick Start</h3>
+                    <div class="summary-content">
+                        <div class="bonus-amount">5 tasks</div>
+                        <div class="bonus-note">Available now</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Withdrawal Section -->
+    <section id="withdraw" class="section-withdrawal">
+        <div class="container">
+            <div class="withdrawal-container">
+                <div class="withdrawal-form">
+                    <h2>Withdrawal Information</h2>
+                    <p>Withdraw your earnings once you complete tasks</p>
+                    
+                    <div class="balance-display">
+                        <div class="available-balance">
+                            <span>Available Balance</span>
+                            <span class="balance-amount">$0.00</span>
+                        </div>
+                        <div class="pending-balance">
+                            <span>Minimum Withdrawal</span>
+                            <span class="balance-amount pending">$25.00</span>
+                        </div>
+                    </div>
+                    
+                    <div class="withdrawal-info-card">
+                        <div class="info-icon">
+                            <i class="fas fa-info-circle"></i>
+                        </div>
+                        <div class="info-content">
+                            <h3>Start Earning First</h3>
+                            <p>Complete at least 2 tasks ($30) to be eligible for withdrawal. Payments are processed weekly on Fridays.</p>
+                            <button class="btn-primary" onclick="window.location.href='tasks.html'">
+                                <i class="fas fa-tasks"></i> Browse Available Tasks
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="withdrawal-summary">
+                        <div class="summary-row">
+                            <span>Current Balance</span>
+                            <span>$0.00</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Minimum Required</span>
+                            <span>$25.00</span>
+                        </div>
+                        <div class="summary-row total">
+                            <span>Tasks Needed</span>
+                            <span>2 tasks</span>
+                        </div>
+                    </div>
+                    
+                    <button class="btn-primary btn-large btn-block" disabled onclick="window.location.href='tasks.html'">
+                        <i class="fas fa-lock"></i> Complete Tasks to Unlock
+                    </button>
+                </div>
+                
+                <div class="withdrawal-info">
+                    <h3><i class="fas fa-info-circle"></i> Withdrawal Information</h3>
+                    
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="info-content">
+                            <h4>Secure Payments</h4>
+                            <p>All withdrawals are processed with 256-bit encryption and PCI DSS compliance.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="info-content">
+                            <h4>Processing Times</h4>
+                            <p>PayPal: 1-2 days • Stripe: Instant to 24h • Bank Transfer: 3-5 business days</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <div class="info-content">
+                            <h4>Payment Schedule</h4>
+                            <p>Weekly payouts every Friday. Minimum withdrawal: $25 (approx. 2 tasks).</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                        </div>
+                        <div class="info-content">
+                            <h4>Tax Information</h4>
+                            <p>All earnings are reported. You'll receive tax documents when you earn over $600/year.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tax Center -->
+    <section class="section-tax">
+        <div class="container">
+            <div class="section-header">
+                <h2>Payment Information</h2>
+                <p class="section-subtitle">Understand how payments work</p>
+            </div>
+            
+            <div class="tax-documents">
+                <div class="document-card">
+                    <div class="document-icon">
+                        <i class="fas fa-file-contract"></i>
+                    </div>
+                    <div class="document-content">
+                        <h3>Payment Structure</h3>
+                        <p>$15 per completed task • Weekly payments • Minimum $25 withdrawal</p>
+                        <div class="document-meta">
+                            <span><i class="fas fa-money-bill-wave"></i> Fixed Rate</span>
+                            <span><i class="fas fa-clock"></i> Weekly</span>
+                        </div>
+                    </div>
+                    <button class="btn-secondary" onclick="window.location.href='tasks.html'">
+                        <i class="fas fa-play-circle"></i> Start Earning
+                    </button>
+                </div>
+                
+                <div class="document-card">
+                    <div class="document-icon">
+                        <i class="fas fa-receipt"></i>
+                    </div>
+                    <div class="document-content">
+                        <h3>Task Requirements</h3>
+                        <p>Complete 2-hour moderation tasks • Quality standards apply • Training provided</p>
+                        <div class="document-meta">
+                            <span><i class="fas fa-clock"></i> 2 hours/task</span>
+                            <span><i class="fas fa-check-circle"></i> Training</span>
+                        </div>
+                    </div>
+                    <button class="btn-secondary">
+                        <i class="fas fa-graduation-cap"></i> View Training
+                    </button>
+                </div>
+                
+                <div class="document-card">
+                    <div class="document-icon">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <div class="document-content">
+                        <h3>Earnings Calculator</h3>
+                        <p>Estimate your potential earnings based on tasks completed</p>
+                        <div class="document-meta">
+                            <span><i class="fas fa-tasks"></i> $15 per task</span>
+                            <span><i class="fas fa-calendar"></i> Weekly</span>
+                        </div>
+                    </div>
+                    <button class="btn-secondary" onclick="calculateEarnings()">
+                        <i class="fas fa-calculator"></i> Calculate
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="logo">
+                        <i class="fas fa-shield-check"></i>
+                        <span>ChatGuard <span class="logo-highlight">Pro</span></span>
+                    </div>
+                    <p class="footer-description">
+                        Professional chat moderation services connecting businesses with reliable moderators.
+                    </p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-discord"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>For Moderators</h4>
+                    <ul class="footer-links">
+                        <li><a href="tasks.html">Find Tasks</a></li>
+                        <li><a href="earnings.html">Earnings Calculator</a></li>
+                        <li><a href="#">Training Program</a></li>
+                        <li><a href="#">Moderator Resources</a></li>
+                        <li><a href="#">Community Forum</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>For Businesses</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Hire Moderators</a></li>
+                        <li><a href="#">Enterprise Solutions</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">Case Studies</a></li>
+                        <li><a href="#">API Documentation</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Press</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Payment Help</a></li>
+                        <li><a href="#">Trust & Safety</a></li>
+                        <li><a href="#">Report Issues</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    &copy; 2024 ChatGuard Pro. All rights reserved.
+                </div>
+                <div class="footer-legal">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Cookie Policy</a>
+                    <a href="#">GDPR Compliance</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Notification Toast -->
+    <div id="notificationToast" class="notification-toast">
+        <div class="toast-content">
+            <i class="fas fa-check-circle"></i>
+            <span class="toast-message">Complete tasks to start earning!</span>
+        </div>
+        <button class="toast-close">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+
+    <script>
+        // Professional Earnings Script
+        document.addEventListener('DOMContentLoaded', function() {
+            // Update navigation based on login state
+            updateNavigation();
+            
+            // Timeframe selector
+            const timeframeBtns = document.querySelectorAll('.timeframe-btn');
+            timeframeBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    timeframeBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const timeframe = this.textContent.toLowerCase();
+                    let message = '';
+                    switch(timeframe) {
+                        case 'week': message = 'Weekly earnings will appear here'; break;
+                        case 'month': message = 'Monthly earnings dashboard'; break;
+                        case 'quarter': message = 'Quarterly earnings overview'; break;
+                        case 'year': message = 'Yearly earnings summary'; break;
+                    }
+                    showToast(message, 'info');
+                });
+            });
+            
+            // Payment tabs
+            const paymentTabs = document.querySelectorAll('.payment-tab');
+            paymentTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    paymentTabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const tabName = this.textContent;
+                    if (tabName === 'Completed') {
+                        showToast('Completed tasks will appear here', 'info');
+                    } else if (tabName === 'Pending') {
+                        showToast('Pending payments dashboard', 'info');
+                    } else {
+                        showToast('All payment history', 'info');
+                    }
+                });
+            });
+            
+            // Show professional welcome
+            setTimeout(() => {
+                showToast('Welcome to your professional earnings dashboard!', 'success');
+            }, 1500);
+        });
+        
+        function updateNavigation() {
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            const userEmail = localStorage.getItem('userEmail') || 'moderator@chatguardpro.com';
+            const navButtons = document.getElementById('navButtons');
+            
+            if (navButtons && isLoggedIn) {
+                const userName = userEmail.split('@')[0];
+                navButtons.innerHTML = `
+                    <div class="user-profile">
+                        <img src="https://i.pravatar.cc/150?img=5" alt="User" class="user-avatar">
+                        <div class="user-info">
+                            <span class="user-name">${userName}</span>
+                            <span class="user-tier">Moderator</span>
+                        </div>
+                        <div class="user-balance">
+                            <i class="fas fa-wallet"></i>
+                            <span>$0.00</span>
+                        </div>
+                    </div>
+                    <a href="logout.html" class="btn-login">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </a>
+                `;
+            }
+        }
+        
+        function calculateEarnings() {
+            const tasks = prompt('How many tasks do you plan to complete per week? (Each pays $15)', '5');
+            if (tasks && !isNaN(tasks) && tasks > 0) {
+                const weekly = tasks * 15;
+                const monthly = weekly * 4;
+                const yearly = monthly * 12;
+                
+                showToast(`Estimated earnings calculated for ${tasks} tasks/week`, 'success');
+                
+                // Create a professional earnings preview
+                const earningsPreview = `
+                    <div style="background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1);">
+                        <h3 style="color: #2563eb; margin-bottom: 1rem;">Earnings Projection</h3>
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1rem;">
+                            <div style="text-align: center; padding: 1rem; background: #f8fafc; border-radius: 8px;">
+                                <div style="font-size: 1.5rem; font-weight: 700; color: #2563eb;">$${weekly}</div>
+                                <div style="font-size: 0.9rem; color: #64748b;">Weekly</div>
+                            </div>
+                            <div style="text-align: center; padding: 1rem; background: #f8fafc; border-radius: 8px;">
+                                <div style="font-size: 1.5rem; font-weight: 700; color: #2563eb;">$${monthly}</div>
+                                <div style="font-size: 0.9rem; color: #64748b;">Monthly</div>
+                            </div>
+                            <div style="text-align: center; padding: 1rem; background: #f8fafc; border-radius: 8px;">
+                                <div style="font-size: 1.5rem; font-weight: 700; color: #2563eb;">$${yearly}</div>
+                                <div style="font-size: 0.9rem; color: #64748b;">Yearly</div>
+                            </div>
+                        </div>
+                        <p style="color: #475569; font-size: 0.9rem; margin: 0;">
+                            Based on ${tasks} tasks/week at $15 per task
+                        </p>
+                    </div>
+                `;
+                
+                // Create a custom toast with the earnings preview
+                const customToast = document.createElement('div');
+                customToast.className = 'notification-toast show';
+                customToast.innerHTML = `
+                    <div class="toast-content">
+                        <i class="fas fa-calculator" style="color: #2563eb;"></i>
+                        <div>
+                            <div style="font-weight: 600; margin-bottom: 0.25rem;">Earnings Projection</div>
+                            <div style="color: #64748b; font-size: 0.9rem;">
+                                Weekly: $${weekly} • Monthly: $${monthly} • Yearly: $${yearly}
+                            </div>
+                        </div>
+                    </div>
+                    <button class="toast-close" onclick="this.parentElement.remove()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                `;
+                document.body.appendChild(customToast);
+                
+                setTimeout(() => customToast.remove(), 8000);
+            }
+        }
+        
+        function showToast(message, type = 'info') {
+            const toast = document.getElementById('notificationToast');
+            const toastIcon = toast.querySelector('i');
+            const toastMessage = toast.querySelector('.toast-message');
+            
+            switch(type) {
+                case 'success':
+                    toastIcon.className = 'fas fa-check-circle';
+                    toastIcon.style.color = 'var(--success)';
+                    break;
+                case 'warning':
+                    toastIcon.className = 'fas fa-exclamation-triangle';
+                    toastIcon.style.color = 'var(--warning)';
+                    break;
+                case 'error':
+                    toastIcon.className = 'fas fa-times-circle';
+                    toastIcon.style.color = 'var(--danger)';
+                    break;
+                default:
+                    toastIcon.className = 'fas fa-info-circle';
+                    toastIcon.style.color = 'var(--info)';
+            }
+            
+            toastMessage.textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 4000);
+        }
+        
+        function toggleMobileMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        }
+    </script>
+</body>
+</html>

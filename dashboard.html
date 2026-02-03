@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moderator Dashboard | ChatGuard Pro - Your Control Center</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="https://img.icons8.com/color/96/000000/chat-protection.png">
+</head>
+<body>
+    <!-- Top Announcement Bar -->
+    <div class="announcement-bar">
+        <div class="container">
+            <span class="announcement-text">
+                <i class="fas fa-bell"></i> 
+                <strong>WELCOME!</strong> Complete tasks to start earning $15. 
+                <a href="tasks.html" class="announcement-link">View Tasks →</a>
+            </span>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <div class="logo">
+                    <i class="fas fa-shield-check"></i>
+                    <span>ChatGuard <span class="logo-highlight">Pro</span></span>
+                </div>
+                
+                <div class="nav-links">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="tasks.html" class="nav-link">Tasks</a>
+                    <a href="earnings.html" class="nav-link">Earnings</a>
+                    <a href="dashboard.html" class="nav-link active">Dashboard</a>
+                    <a href="#training" class="nav-link">Training</a>
+                    <a href="#support" class="nav-link">Support</a>
+                </div>
+                
+                <div class="nav-buttons" id="navButtons">
+                    <!-- Navigation will be auto-updated by JavaScript -->
+                    <a href="login.html" class="btn-login">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </a>
+                    <a href="index.html#signup" class="btn-primary">
+                        <i class="fas fa-user-plus"></i> Sign Up
+                    </a>
+                </div>
+                
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Dashboard Header -->
+    <section class="dashboard-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="welcome-section">
+                    <h1>Welcome to Your Moderation Dashboard!</h1>
+                    <p>Complete tasks to start earning $15 per task. Track your progress and earnings here.</p>
+                    
+                    <div class="quick-stats">
+                        <div class="quick-stat">
+                            <i class="fas fa-tasks"></i>
+                            <div>
+                                <div class="stat-label">Available Tasks</div>
+                                <div class="stat-value">5</div>
+                            </div>
+                        </div>
+                        <div class="quick-stat">
+                            <i class="fas fa-money-bill-wave"></i>
+                            <div>
+                                <div class="stat-label">Your Balance</div>
+                                <div class="stat-value" id="dashboardBalance">$0.00</div>
+                            </div>
+                        </div>
+                        <div class="quick-stat">
+                            <i class="fas fa-check-circle"></i>
+                            <div>
+                                <div class="stat-label">Tasks Completed</div>
+                                <div class="stat-value tasks-completed-count">0</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="header-actions">
+                    <button class="btn-primary" onclick="window.location.href='tasks.html'">
+                        <i class="fas fa-play"></i> Start Task
+                    </button>
+                    <button class="btn-secondary" onclick="window.location.href='earnings.html'">
+                        <i class="fas fa-chart-line"></i> View Earnings
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Dashboard Grid -->
+    <section class="dashboard-main">
+        <div class="container">
+            <div class="dashboard-grid">
+                <!-- Left Column -->
+                <div class="dashboard-column">
+                    <!-- Getting Started -->
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h2><i class="fas fa-rocket"></i> Getting Started</h2>
+                            <span class="card-badge success">Step 1</span>
+                        </div>
+                        
+                        <div class="getting-started">
+                            <div class="start-step completed">
+                                <div class="step-check">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <div class="step-content">
+                                    <h3>Account Created</h3>
+                                    <p>Your account is ready to start earning</p>
+                                </div>
+                            </div>
+                            
+                            <div class="start-step" id="trainingStep">
+                                <div class="step-check">
+                                    <div class="step-number">2</div>
+                                </div>
+                                <div class="step-content">
+                                    <h3>Complete Training</h3>
+                                    <p>30-minute training to learn moderation basics</p>
+                                    <button class="btn-primary btn-small" onclick="window.location.href='#training'">
+                                        <i class="fas fa-play-circle"></i> Start Training
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="start-step" id="firstTaskStep">
+                                <div class="step-check">
+                                    <div class="step-number">3</div>
+                                </div>
+                                <div class="step-content">
+                                    <h3>First Task</h3>
+                                    <p>Complete your first moderation task</p>
+                                    <button class="btn-secondary btn-small" onclick="window.location.href='tasks.html'">
+                                        <i class="fas fa-eye"></i> Browse Tasks
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="start-step" id="firstPaymentStep">
+                                <div class="step-check">
+                                    <div class="step-number">4</div>
+                                </div>
+                                <div class="step-content">
+                                    <h3>First Payment</h3>
+                                    <p>Earn $15 from your first completed task</p>
+                                    <div class="step-reward">+$15</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Available Tasks -->
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h2><i class="fas fa-tasks"></i> Recommended Tasks</h2>
+                            <a href="tasks.html" class="card-link">View All →</a>
+                        </div>
+                        
+                        <div class="recommended-tasks">
+                            <div class="recommended-task">
+                                <div class="task-info">
+                                    <div class="task-platform">
+                                        <i class="fab fa-twitch"></i>
+                                        <div>
+                                            <h3>Gaming Stream Moderation</h3>
+                                            <p>Perfect for beginners • 2 hours</p>
+                                        </div>
+                                    </div>
+                                    <div class="task-payment">$15</div>
+                                </div>
+                                
+                                <div class="task-actions">
+                                    <button class="btn-task-action" onclick="window.location.href='tasks.html'">
+                                        <i class="fas fa-info-circle"></i> Details
+                                    </button>
+                                    <button class="btn-task-action btn-primary" onclick="startTask(1)">
+                                        <i class="fas fa-play"></i> Start
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="recommended-task">
+                                <div class="task-info">
+                                    <div class="task-platform">
+                                        <i class="fab fa-discord"></i>
+                                        <div>
+                                            <h3>Discord Community Review</h3>
+                                            <p>Flexible hours • 2 hours</p>
+                                        </div>
+                                    </div>
+                                    <div class="task-payment">$15</div>
+                                </div>
+                                
+                                <div class="task-actions">
+                                    <button class="btn-task-action" onclick="window.location.href='tasks.html'">
+                                        <i class="fas fa-info-circle"></i> Details
+                                    </button>
+                                    <button class="btn-task-action btn-primary" onclick="startTask(2)">
+                                        <i class="fas fa-play"></i> Start
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right Column -->
+                <div class="dashboard-column">
+                    <!-- Quick Stats -->
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h2><i class="fas fa-chart-line"></i> Your Progress</h2>
+                        </div>
+                        
+                        <div class="progress-stats">
+                            <div class="progress-stat">
+                                <div class="stat-circle">
+                                    <svg width="100" height="100" viewBox="0 0 100 100">
+                                        <circle class="circle-bg" cx="50" cy="50" r="45"></circle>
+                                        <circle class="circle-progress" cx="50" cy="50" r="45" id="trainingProgressCircle"></circle>
+                                    </svg>
+                                    <div class="stat-value" id="trainingProgressText">0%</div>
+                                </div>
+                                <div class="stat-info">
+                                    <h3>Training Progress</h3>
+                                    <p class="training-status" id="trainingStatusText">Complete training to unlock tasks</p>
+                                    <button class="btn-primary btn-small" onclick="window.location.href='#training'" id="trainingButton">
+                                        Start Training
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="progress-numbers">
+                                <div class="progress-number">
+                                    <div class="number-value" id="tasksCompletedValue">0</div>
+                                    <div class="number-label">Tasks Completed</div>
+                                </div>
+                                <div class="progress-number">
+                                    <div class="number-value" id="totalEarnedValue">$0</div>
+                                    <div class="number-label">Total Earned</div>
+                                </div>
+                                <div class="progress-number">
+                                    <div class="number-value">5</div>
+                                    <div class="number-label">Available Tasks</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Quick Actions -->
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h2><i class="fas fa-bolt"></i> Quick Actions</h2>
+                        </div>
+                        
+                        <div class="quick-actions-grid">
+                            <button class="quick-action" onclick="window.location.href='tasks.html'">
+                                <div class="action-icon">
+                                    <i class="fas fa-search"></i>
+                                </div>
+                                <div class="action-content">
+                                    <h3>Find Tasks</h3>
+                                    <p>Browse available moderation tasks</p>
+                                </div>
+                            </button>
+                            
+                            <button class="quick-action" onclick="window.location.href='#training'">
+                                <div class="action-icon">
+                                    <i class="fas fa-graduation-cap"></i>
+                                </div>
+                                <div class="action-content">
+                                    <h3>Training Center</h3>
+                                    <p>Learn moderation skills</p>
+                                </div>
+                            </button>
+                            
+                            <button class="quick-action" onclick="window.location.href='earnings.html'">
+                                <div class="action-icon">
+                                    <i class="fas fa-chart-bar"></i>
+                                </div>
+                                <div class="action-content">
+                                    <h3>Earnings</h3>
+                                    <p>Track your income</p>
+                                </div>
+                            </button>
+                            
+                            <button class="quick-action" onclick="showSupport()">
+                                <div class="action-icon">
+                                    <i class="fas fa-headset"></i>
+                                </div>
+                                <div class="action-content">
+                                    <h3>Get Support</h3>
+                                    <p>Need help? Contact us</p>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Training Progress -->
+    <section id="training" class="section-training">
+        <div class="container">
+            <div class="section-header">
+                <h2>Moderator Training & Certification</h2>
+                <p class="section-subtitle">Complete our training program to become a certified moderator</p>
+            </div>
+            
+            <div class="training-progress">
+                <div class="progress-overview">
+                    <div class="progress-circle">
+                        <svg width="120" height="120" viewBox="0 0 120 120">
+                            <circle class="circle-bg" cx="60" cy="60" r="55"></circle>
+                            <circle class="circle-progress-large" cx="60" cy="60" r="55" id="mainTrainingCircle"></circle>
+                        </svg>
+                        <div class="progress-text">
+                            <div class="progress-percent" id="mainTrainingPercent">0%</div>
+                            <div class="progress-label">Complete</div>
+                        </div>
+                    </div>
+                    
+                    <div class="progress-details">
+                        <h3>Professional Moderator Training</h3>
+                        <p>Complete our comprehensive training program to learn professional chat moderation skills and start earning $15 per task.</p>
+                        
+                        <div class="progress-stats">
+                            <div class="progress-stat">
+                                <div class="stat-number" id="completedModules">0</div>
+                                <div class="stat-label">Modules Completed</div>
+                            </div>
+                            <div class="progress-stat">
+                                <div class="stat-number">3</div>
+                                <div class="stat-label">Modules Total</div>
+                            </div>
+                            <div class="progress-stat">
+                                <div class="stat-number">30 min</div>
+                                <div class="stat-label">Total Time</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="training-modules">
+                    <div class="module-card" id="module1">
+                        <div class="module-header">
+                            <div class="module-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <div class="module-status">
+                                <i class="fas fa-lock"></i>
+                            </div>
+                        </div>
+                        <h3>Moderation Basics</h3>
+                        <p>Fundamentals of chat moderation and community guidelines</p>
+                        <div class="module-meta">
+                            <span><i class="fas fa-clock"></i> 10 min</span>
+                            <button class="btn-continue" onclick="startTrainingModule(1)">Start</button>
+                        </div>
+                    </div>
+                    
+                    <div class="module-card locked" id="module2">
+                        <div class="module-header">
+                            <div class="module-icon">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                            <div class="module-status">
+                                <i class="fas fa-lock"></i>
+                            </div>
+                        </div>
+                        <h3>Content Guidelines</h3>
+                        <p>Identifying inappropriate content and enforcement</p>
+                        <div class="module-meta">
+                            <span><i class="fas fa-clock"></i> 10 min</span>
+                            <span class="module-status-text">Available after Module 1</span>
+                        </div>
+                    </div>
+                    
+                    <div class="module-card locked" id="module3">
+                        <div class="module-header">
+                            <div class="module-icon">
+                                <i class="fas fa-gamepad"></i>
+                            </div>
+                            <div class="module-status">
+                                <i class="fas fa-lock"></i>
+                            </div>
+                        </div>
+                        <h3>Platform Training</h3>
+                        <p>Specific training for Twitch, Discord, and other platforms</p>
+                        <div class="module-meta">
+                            <span><i class="fas fa-clock"></i> 10 min</span>
+                            <span class="module-status-text">Available after Module 2</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Support Section -->
+    <section id="support" class="section-support">
+        <div class="container">
+            <div class="support-container">
+                <div class="support-content">
+                    <h2>Professional Moderator Support</h2>
+                    <p>Our support team is available to help you succeed as a moderator</p>
+                    
+                    <div class="support-options">
+                        <div class="support-option">
+                            <div class="option-icon">
+                                <i class="fas fa-comments"></i>
+                            </div>
+                            <div class="option-content">
+                                <h3>Quick Start Guide</h3>
+                                <p>Step-by-step guide to complete your first task</p>
+                                <button class="btn-primary btn-small" onclick="showGuide()">
+                                    <i class="fas fa-book"></i> View Guide
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="support-option">
+                            <div class="option-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="option-content">
+                                <h3>Email Support</h3>
+                                <p>Professional support within 2 hours</p>
+                                <button class="btn-secondary btn-small" onclick="showSupport()">
+                                    <i class="fas fa-paper-plane"></i> Contact
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="support-option">
+                            <div class="option-icon">
+                                <i class="fas fa-file-alt"></i>
+                            </div>
+                            <div class="option-content">
+                                <h3>Knowledge Base</h3>
+                                <p>Comprehensive guides and tutorials</p>
+                                <button class="btn-secondary btn-small" onclick="showFAQ()">
+                                    <i class="fas fa-question-circle"></i> Browse Resources
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="support-stats">
+                    <div class="stats-card">
+                        <div class="stats-header">
+                            <i class="fas fa-rocket"></i>
+                            <h3>Getting Started</h3>
+                        </div>
+                        <div class="stats-content">
+                            <div class="stat">
+                                <div class="stat-value">30 min</div>
+                                <div class="stat-label">Training Time</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">$15</div>
+                                <div class="stat-label">First Task Earnings</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">2 hours</div>
+                                <div class="stat-label">Avg. Task Time</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="logo">
+                        <i class="fas fa-shield-check"></i>
+                        <span>ChatGuard <span class="logo-highlight">Pro</span></span>
+                    </div>
+                    <p class="footer-description">
+                        Professional chat moderation services connecting businesses with reliable moderators.
+                    </p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-discord"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>For Moderators</h4>
+                    <ul class="footer-links">
+                        <li><a href="tasks.html">Find Tasks</a></li>
+                        <li><a href="earnings.html">Earnings Calculator</a></li>
+                        <li><a href="#training">Training Program</a></li>
+                        <li><a href="#">Moderator Resources</a></li>
+                        <li><a href="#">Community Forum</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>For Businesses</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Hire Moderators</a></li>
+                        <li><a href="#">Enterprise Solutions</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">Case Studies</a></li>
+                        <li><a href="#">API Documentation</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Press</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul class="footer-links">
+                        <li><a href="#support">Help Center</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Payment Help</a></li>
+                        <li><a href="#">Trust & Safety</a></li>
+                        <li><a href="#">Report Issues</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    &copy; 2024 ChatGuard Pro. All rights reserved.
+                </div>
+                <div class="footer-legal">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Cookie Policy</a>
+                    <a href="#">GDPR Compliance</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Notification Toast -->
+    <div id="notificationToast" class="notification-toast">
+        <div class="toast-content">
+            <i class="fas fa-check-circle"></i>
+            <span class="toast-message">Welcome to your dashboard!</span>
+        </div>
+        <button class="toast-close">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+
+    <script>
+        // Professional Dashboard Script
+        document.addEventListener('DOMContentLoaded', function() {
+            // Update date
+            const today = new Date();
+            const dateElements = document.querySelectorAll('.current-date');
+            dateElements.forEach(el => {
+                el.textContent = today.toLocaleDateString('en-US', { 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric' 
+                });
+            });
+            
+            // Check login state and update navigation
+            updateNavigation();
+            
+            // Initialize training modules
+            initTraining();
+            
+            // Initialize task functionality
+            initTasks();
+            
+            // Show welcome toast
+            setTimeout(() => {
+                showToast('Welcome to your professional moderation dashboard!', 'success');
+            }, 1000);
+        });
+        
+        function updateNavigation() {
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            const userEmail = localStorage.getItem('userEmail') || 'moderator@chatguardpro.com';
+            const navButtons = document.getElementById('navButtons');
+            
+            if (navButtons && isLoggedIn) {
+                const userName = userEmail.split('@')[0];
+                navButtons.innerHTML = `
+                    <div class="user-profile">
+                        <img src="https://i.pravatar.cc/150?img=5" alt="User" class="user-avatar">
+                        <div class="user-info">
+                            <span class="user-name">${userName}</span>
+                            <span class="user-tier">Moderator</span>
+                        </div>
+                        <div class="user-balance">
+                            <i class="fas fa-wallet"></i>
+                            <span>$0.00</span>
+                        </div>
+                    </div>
+                    <a href="logout.html" class="btn-login">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </a>
+                `;
+            }
+        }
+        
+        function initTraining() {
+            // Training module functionality
+            const trainingButton = document.getElementById('trainingButton');
+            if (trainingButton) {
+                trainingButton.addEventListener('click', function() {
+                    showToast('Starting professional moderator training...', 'info');
+                });
+            }
+            
+            // Initialize progress circles
+            updateProgressCircles(0);
+        }
+        
+        function initTasks() {
+            // Task button functionality
+            const taskButtons = document.querySelectorAll('.btn-task-action.btn-primary');
+            taskButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const taskTitle = this.closest('.recommended-task').querySelector('h3').textContent;
+                    showToast(`Starting task: ${taskTitle}`, 'info');
+                    
+                    // Show loading state
+                    const originalText = this.innerHTML;
+                    this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Starting...';
+                    this.disabled = true;
+                    
+                    // Simulate task start
+                    setTimeout(() => {
+                        this.innerHTML = originalText;
+                        this.disabled = false;
+                        showToast('Task started successfully! Complete within 2 hours to earn $15.', 'success');
+                    }, 2000);
+                });
+            });
+        }
+        
+        function startTrainingModule(moduleNumber) {
+            const module = document.getElementById(`module${moduleNumber}`);
+            if (!module) return;
+            
+            // Show loading
+            const startButton = module.querySelector('.btn-continue');
+            const originalText = startButton.textContent;
+            startButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
+            startButton.disabled = true;
+            
+            // Simulate training start
+            setTimeout(() => {
+                module.classList.remove('locked');
+                module.classList.add('in-progress');
+                module.querySelector('.module-status i').className = 'fas fa-spinner fa-spin';
+                
+                // Update button
+                startButton.innerHTML = '<i class="fas fa-play"></i> Continue';
+                startButton.disabled = false;
+                startButton.onclick = () => completeTrainingModule(moduleNumber);
+                
+                showToast('Training module started! Complete to unlock next module.', 'info');
+                
+                // Update progress
+                updateProgressCircles(33);
+            }, 1500);
+        }
+        
+        function completeTrainingModule(moduleNumber) {
+            const module = document.getElementById(`module${moduleNumber}`);
+            if (!module) return;
+            
+            module.classList.remove('in-progress');
+            module.classList.add('completed');
+            module.querySelector('.module-status i').className = 'fas fa-check-circle';
+            
+            // Update next module if exists
+            const nextModule = document.getElementById(`module${moduleNumber + 1}`);
+            if (nextModule) {
+                nextModule.classList.remove('locked');
+                nextModule.querySelector('.module-status-text').textContent = 'Available Now';
+            }
+            
+            // Update progress
+            const progress = moduleNumber * 33;
+            updateProgressCircles(progress);
+            
+            // Show completion message
+            showToast(`Module ${moduleNumber} completed! ${moduleNumber < 3 ? 'Next module unlocked.' : 'Training complete!'}`, 'success');
+            
+            // Update stats
+            document.getElementById('completedModules').textContent = moduleNumber;
+            document.getElementById('mainTrainingPercent').textContent = `${progress}%`;
+            
+            // Update training button if all complete
+            if (moduleNumber === 3) {
+                const trainingButton = document.getElementById('trainingButton');
+                trainingButton.textContent = 'Training Complete';
+                trainingButton.disabled = true;
+                trainingButton.style.background = 'var(--success)';
+                
+                document.getElementById('trainingStatusText').textContent = 'Ready to start tasks!';
+            }
+        }
+        
+        function updateProgressCircles(percentage) {
+            // Update main circle
+            const mainCircle = document.getElementById('mainTrainingCircle');
+            const circumference = 2 * Math.PI * 55;
+            const offset = circumference - (percentage / 100) * circumference;
+            mainCircle.style.strokeDasharray = circumference;
+            mainCircle.style.strokeDashoffset = offset;
+            
+            // Update small circle
+            const smallCircle = document.getElementById('trainingProgressCircle');
+            const smallCircumference = 2 * Math.PI * 45;
+            const smallOffset = smallCircumference - (percentage / 100) * smallCircumference;
+            smallCircle.style.strokeDasharray = smallCircumference;
+            smallCircle.style.strokeDashoffset = smallOffset;
+            
+            // Update text
+            document.getElementById('trainingProgressText').textContent = `${percentage}%`;
+            document.getElementById('mainTrainingPercent').textContent = `${percentage}%`;
+        }
+        
+        function showSupport() {
+            showToast('Professional support team is available to assist you.', 'info');
+        }
+        
+        function showGuide() {
+            showToast('Opening Quick Start Guide...', 'info');
+        }
+        
+        function showFAQ() {
+            showToast('Opening Knowledge Base...', 'info');
+        }
+        
+        function showToast(message, type = 'info') {
+            const toast = document.getElementById('notificationToast');
+            const toastIcon = toast.querySelector('i');
+            const toastMessage = toast.querySelector('.toast-message');
+            
+            switch(type) {
+                case 'success':
+                    toastIcon.className = 'fas fa-check-circle';
+                    toastIcon.style.color = 'var(--success)';
+                    break;
+                case 'warning':
+                    toastIcon.className = 'fas fa-exclamation-triangle';
+                    toastIcon.style.color = 'var(--warning)';
+                    break;
+                case 'error':
+                    toastIcon.className = 'fas fa-times-circle';
+                    toastIcon.style.color = 'var(--danger)';
+                    break;
+                default:
+                    toastIcon.className = 'fas fa-info-circle';
+                    toastIcon.style.color = 'var(--info)';
+            }
+            
+            toastMessage.textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 4000);
+        }
+        
+        function toggleMobileMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        }
+    </script>
+</body>
+</html>
